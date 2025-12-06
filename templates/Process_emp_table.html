@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Process_emp_details</title>
+    <style>
+        /* Main container for both sides */
+        .main-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 40px;
+            padding-left: 20px;
+            padding-top: 100px;
+        }
+        
+        /* Left and Right side containers */
+        .left-side-container, .right-side-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            flex: 1;
+        }
+        
+        /* Optionally, adjust the left side container margin for individual spacing */
+        .left-side-container {
+            margin-left: 30px;
+        }
+        
+        /* ID card styling */
+        .box {
+            width: 600px;
+            height: 145px;
+            gap: 20px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            display: flex;
+            padding: 15px;
+            align-items: center;
+        }
+        
+        .left-side {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-right: 20px;
+        }
+        
+        .photo img {
+            width: 75px;
+            height: 95px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+        
+        .hod {
+            font-size: 11px;
+            font-weight: bold;
+            margin-bottom: 0px;
+        }
+        
+        .name-score {
+            font-size: 11px;
+        }
+        
+        .table-container {
+            display: flex;
+            gap: 10px;
+            width: 100%;
+        }
+        
+        .table-container-pending {
+            display: flex;
+            gap: 10px;
+            width: 100%;
+        }
+        
+        table {
+            width: 50%;
+            height: 60px;
+            border-collapse: collapse;
+            padding: 8px;
+        }
+        
+        td {
+            border: 2px solid #ccc;
+            padding: 8px;
+            width: 50%;
+            font-size: 13px;
+        }
+        
+        /* Grid layout for the right side */
+        .right-side-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+        
+        /* Date form styling */
+        .date-form {
+            margin: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 12px;
+            display: flex;
+            gap: 10px;
+        }
+        
+        .date-container {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-start;
+        }
+        
+        .labels {
+            font-size: 12px;
+        }
+        
+        .date-input {
+            padding: 5px;
+            font-size: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        
+        .submit-button {
+            padding: 6px 12px;
+            font-size: 12px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        .submit-button:hover {
+            background-color: #45a049;
+        }
+
+
+        .center-div {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        /* Mobile view adjustments */
+        @media (max-width: 768px) {
+            .main-container {
+                flex-direction: column;
+                padding-left: 10px;
+                padding-top: 50px;
+            }
+        
+            /* Left and Right side containers */
+            .left-side-container, .right-side-container {
+                margin-left: 0;
+                flex: none;
+            }
+        
+            /* Adjusting ID card width */
+            .box {
+                width: 100%;
+                height: auto;
+                flex-direction: column;
+                padding: 10px;
+            }
+        
+            .photo img {
+                width: 60px;
+                height: 80px;
+            }
+        
+            .table-container {
+                flex-direction: column;
+                width: 100%;
+            }
+        
+            .table-container-pending {
+                flex-direction: column;
+                width: 100%;
+            }
+        
+            table {
+                width: 100%;
+                height: auto;
+                border-collapse: collapse; /* Ensures borders collapse neatly */
+            }
+        
+            td {
+                width: 50%;
+                font-size: 12px;
+                padding: 10px; /* Increased padding for better spacing */
+                border: 1px solid #ccc;
+            }
+        
+            /* Adjust grid layout for smaller screens */
+            .right-side-container {
+                grid-template-columns: 1fr; /* Single column layout */
+            }
+        
+            /* Date form styling */
+            .date-form {
+                position: static;
+                margin: 20px 0;
+                padding: 10px;
+                width: 100%;
+            }
+        
+            .date-container {
+                flex-direction: column;
+            }
+        
+            .date-input {
+                width: 100%;
+            }
+        
+            .submit-button {
+                width: 100%;
+                padding: 6px 12px; /* Smaller padding */
+                font-size: 12px; /* Adjusted font size for better readability */
+            }
+        }
+        
+        @media (max-width: 480px) {
+            /* Further adjustments for very small screens */
+            .main-container {
+                padding-left: 5px;
+                padding-top: 30px;
+            }
+        
+            .box {
+                padding: 5px;
+            }
+        
+            .photo img {
+                width: 50px;
+                height: 70px;
+            }
+        
+            .hod, .name-score {
+                font-size: 7px;
+            }
+        
+            .submit-button {
+                width: 100%;
+                padding: 4px 8px; /* Smaller padding for very small screens */
+                font-size: 10px; /* Smaller font size */
+            }
+        
+            table {
+                width: 100%;
+                font-size: 12px;
+                border-collapse: collapse; /* Ensures borders collapse neatly */
+            }
+        
+            td {
+                font-size: 12px;
+                padding: 8px; /* Adjust padding to make content readable */
+                border: 1px solid #ccc;
+            }
+        
+            /* Adjust table cell padding for small screens */
+            table td {
+                padding: 8px; /* Increased padding for clarity */
+            }
+        }
+        
+        
+    </style>
+    
+</head>
+<body>
+    <!-- Date form for selecting from and to date, positioned at the top left -->
+    <form method="POST" action='/process_emp_table' class="date-form">
+        <div class="date-container">
+            <div>
+                <label for="from-date" class="labels">From Date:</label>
+                <input type="date" id="from-date" name="from_date" class="date-input">
+            </div>
+            <div>
+                <label for="to-date" class="labels">To Date:</label>
+                <input type="date" id="to-date" name="to_date" class="date-input">
+            </div>
+        </div>
+        <button type="submit" class="submit-button">Submit</button>
+    </form>
+    <!-- Right side container (for 6 boxs) -->
+    <div class="main-container">
+        <div class="right-side-container">
+            <!-- box #1 -->
+            <div class="box">
+                <div class="left-side">
+                    <div class="photo">
+                        <img src="{{ url_for('static', filename='images/HARISH.V.jpeg') }}" alt="ID Photo">
+                    </div>
+                    <div class="hod">HOD</div>
+                    <div class="name-score">
+                        <div id="HARISH_process_name"></div>
+                        <div>Score: 85%</div>
+                    </div>
+                </div>
+                <div class="table-container">
+                    <table>
+                        <tr>
+                            <td>Task count:</td>
+                            <td><div id="HARISH_process_task_count"></div></td>
+                        </tr>
+                        <tr>
+                            <td>Activities Sheet:</td>
+                            <td><div id="HARISH_process_acti_count"></div></td>
+                        </tr>
+                        <tr>
+                            <td>Absent count:</td>
+                            <td><div id="HARISH_process_absent_count"></div></td>
+                        </tr>
+                        <tr>
+                            <td>Late count:</td>
+                            <td><div id="HARISH_process_Late_count"></div></td>
+                        </tr>
+                    </table>
+
+                    <table>
+                        <tr>
+                            <td>Task score:</td>
+                            <td><div id="HARISH_process_task_score"></div></td>
+                        </tr>
+                        <tr>
+                            <td>Proposal Request pending:</td>
+                            <td><div id="Proposal_Request_pending"></div></td>
+                        </tr>
+                        <tr>
+                            <td>Incident count:</td>
+                            <td><div id="HARISH_process_incident"></div></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- box #2 -->
+            <div class="box">
+                <div class="left-side">
+                    <div class="photo">
+                        <img src="{{ url_for('static', filename='images/Keerthana.PNG') }}" alt="ID Photo">
+                    </div>
+                    <div class="name-score">
+                        <div id="KEERTHANA_process_name"></div>
+                        <div>Score: 85%</div>
+                    </div>
+                </div>
+                <div class="table-container">
+                    <table>
+                        <tr>
+                            <td>Task count:</td>
+                            <td><div id="KEERTHANA_process_task_count"></div></td>
+                        </tr>
+                        <tr>
+                            <td>Activities Sheet:</td>
+                            <td><div id="KEERTHANA_process_acti_count"></div></td>
+                        </tr>
+                        <tr>
+                            <td>Absent count:</td>
+                            <td><div id="KEERTHANA_process_absent_count"></div></td>
+                        </tr>
+                        <tr>
+                            <td>Late count:</td>
+                            <td><div id="KEERTHANA_process_Late_count"></div></td>
+                        </tr>
+                    </table>
+
+                    <table>
+                        <tr>
+                            <td>Task score:</td>
+                            <td><div id="KEERTHANA_process_task_score"></div></td>
+                        </tr>
+                        <tr>
+                            <td>Incident count:</td>
+                            <td><div id="KEERTHANA_process_incident"></div></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- box #3 -->
+            <div class="box">
+                <div class="left-side">
+                    <div class="photo">
+                        <img src="{{ url_for('static', filename='images/Athish.jpg') }}" alt="ID Photo">
+                    </div>
+                    <div class="name-score">
+                        <div id="ATHISH_process_name"></div>
+                        <div>Score: 85%</div>
+                    </div>
+                </div>
+                <div class="table-container">
+                    <table>
+                        <tr>
+                            <td>Task count:</td>
+                            <td><div id="ATHISH_process_task_count"></div></td>
+                        </tr>
+                        <tr>
+                            <td>Activities Sheet:</td>
+                            <td><div id="ATHISH_process_acti_count"></div></td>
+                        </tr>
+                        <tr>
+                            <td>Absent count:</td>
+                            <td><div id="ATHISH_process_absent_count"></div></td>
+                        </tr>
+                        <tr>
+                            <td>Late count:</td>
+                            <td><div id="ATHISH_process_Late_count"></div></td>
+                        </tr>
+                    </table>
+
+                    <table>
+                        <tr>
+                            <td>Task score:</td>
+                            <td><div id="ATHISH_process_task_score"></div></td>
+                        </tr>
+                        <tr>
+                            <td>Incident count:</td>
+                            <td><div id="ATHISH_process_incident"></div></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- box #4 -->
+            <div class="box">
+                <div class="left-side">
+                    <div class="photo">
+                        <img src="{{ url_for('static', filename='images/Sanjey.jpg') }}" alt="ID Photo">
+                    </div>
+                    <div class="name-score">
+                        <div id="SANJEY_process_name"></div>
+                        <div>Score: 85%</div>
+                    </div>
+                </div>
+                <div class="table-container">
+                    <table>
+                        <tr>
+                            <td>Task count:</td>
+                            <td><div id="SANJEY_process_task_count"></div></td>
+                        </tr>
+                        <tr>
+                            <td>Activities Sheet:</td>
+                            <td><div id="SANJEY_process_acti_count"></div></td>
+                        </tr>
+                        <tr>
+                            <td>Absent count:</td>
+                            <td><div id="SANJEY_process_absent_count"></div></td>
+                        </tr>
+                        <tr>
+                            <td>Late count:</td>
+                            <td><div id="SANJEY_process_Late_count"></div></td>
+                        </tr>
+                    </table>
+
+                    <table>
+                        <tr>
+                            <td>Task score:</td>
+                            <td><div id="SANJEY_process_task_score"></div></td>
+                        </tr>
+                        <tr>
+                            <td>Incident count:</td>
+                            <td><div id="SANJEY_process_incident"></div></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- box #5 -->
+            <div class="box">
+                <div class="left-side">
+                    <div class="photo">
+                        <img src="{{ url_for('static', filename='images/Naveen.jpg') }}" alt="ID Photo">
+                    </div>
+                    <div class="name-score">
+                        <div id="NAVEEN_process_name"></div>
+                        <div>Score: 85%</div>
+                    </div>
+                </div>
+                <div class="table-container">
+                    <table>
+                        <tr>
+                            <td>Task count:</td>
+                            <td><div id="NAVEEN_process_task_count"></div></td>
+                        </tr>
+                        <tr>
+                            <td>Activities Sheet:</td>
+                            <td><div id="NAVEEN_process_acti_count"></div></td>
+                        </tr>
+                        <tr>
+                            <td>Absent count:</td>
+                            <td><div id="NAVEEN_process_absent_count"></div></td>
+                        </tr>
+                        <tr>
+                            <td>Late count:</td>
+                            <td><div id="NAVEEN_process_Late_count"></div></td>
+                        </tr>
+                    </table>
+
+                    <table>
+                        <tr>
+                            <td>Task score:</td>
+                            <td><div id="NAVEEN_process_task_score"></div></td>
+                        </tr>
+                        <tr>
+                            <td>Incident count:</td>
+                            <td><div id="NAVEEN_process_incident"></div></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- box #6 -->
+            <div class="box">
+                <div class="left-side">
+                    <div class="photo">
+                        <img src="{{ url_for('static', filename='images/Adhi Shankar.jpeg') }}" alt="ID Photo">
+                    </div>
+                    <div class="name-score">
+                        <div id="ADHI_SHANKAR_process_name"></div>
+                        <div>Score: 85%</div>
+                    </div>
+                </div>
+                <div class="table-container">
+                    <table>
+                        <tr>
+                            <td>Task count:</td>
+                            <td><div id="ADHI_SHANKAR_process_task_count"></div></td>
+                        </tr>
+                        <tr>
+                            <td>Activities Sheet:</td>
+                            <td><div id="ADHI_SHANKAR_process_acti_count"></div></td>
+                        </tr>
+                        <tr>
+                            <td>Absent count:</td>
+                            <td><div id="ADHI_SHANKAR_process_absent_count"></div></td>
+                        </tr>
+                        <tr>
+                            <td>Late count:</td>
+                            <td><div id="ADHI_SHANKAR_process_Late_count"></div></td>
+                        </tr>
+                    </table>
+
+                    <table>
+                        <tr>
+                            <td>Task score:</td>
+                            <td><div id="ADHI_SHANKAR_process_task_score"></div></td>
+                        </tr>
+                        <tr>
+                            <td>Incident count:</td>
+                            <td><div id="ADHI_SHANKAR_process_incident"></div></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+             <!-- box #7 -->
+
+             <div class="box">
+                <div class="left-side">
+                    <div class="photo">
+                        <img src="{{ url_for('static', filename='images/Mounika M.jpg') }}" alt="ID Photo">
+                    </div>
+                    <div class="name-score">
+                        <div id="MOUNIKA_process_name"></div>
+                        <div>Score: 85%</div>
+                    </div>
+                </div>
+                <div class="table-container">
+                    <table>
+                        <tr>
+                            <td>Task count:</td>
+                            <td><div id="MOUNIKA_process_task_count"></div></td>
+                        </tr>
+                        <tr>
+                            <td>Activities Sheet:</td>
+                            <td><div id="MOUNIKA_process_acti_count"></div></td>
+                        </tr>
+                        <tr>
+                            <td>Absent count:</td>
+                            <td><div id="MOUNIKA_process_absent_count"></div></td>
+                        </tr>
+                        <tr>
+                            <td>Late count:</td>
+                            <td><div id="MOUNIKA_process_Late_count"></div></td>
+                        </tr>
+                    </table>
+
+                    <table>
+                        <tr>
+                            <td>Task score:</td>
+                            <td><div id="MOUNIKA_process_task_score"></div></td>
+                        </tr>
+                        <tr>
+                            <td>Incident count:</td>
+                            <td><div id="MOUNIKA_process_incident"></div></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+
+             <!-- box #8 -->
+
+             <div class="box">
+                <div class="left-side">
+                    <div class="photo">
+                        <img src="{{ url_for('static', filename='images/Manikandan.jpg') }}" alt="ID Photo">
+                    </div>
+                    <div class="name-score">
+                        <div id="MANIKANDAN_process_name"></div>
+                        <div>Score: 85%</div>
+                    </div>
+                </div>
+                <div class="table-container">
+                    <table>
+                        <tr>
+                            <td>Task count:</td>
+                            <td><div id="MANIKANDAN_process_task_count"></div></td>
+                        </tr>
+                        <tr>
+                            <td>Activities Sheet:</td>
+                            <td><div id="MANIKANDAN_process_acti_count"></div></td>
+                        </tr>
+                        <tr>
+                            <td>Absent count:</td>
+                            <td><div id="MANIKANDAN_process_absent_count"></div></td>
+                        </tr>
+                        <tr>
+                            <td>Late count:</td>
+                            <td><div id="MANIKANDAN_process_Late_count"></div></td>
+                        </tr>
+                    </table>
+
+                    <table>
+                        <tr>
+                            <td>Task score:</td>
+                            <td><div id="MANIKANDAN_process_task_score"></div></td>
+                        </tr>
+                        <tr>
+                            <td>Incident count:</td>
+                            <td><div id="MANIKANDAN_process_incident"></div></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        window.onload = function() {
+            // The employee data passed from Flask
+            var processData = {{ process_data | tojson }};
+            
+            if (processData) {
+                const poCreatedCount = processData.po_created_count || 0;
+                const poApprovedHodCount = processData.po_approved_hod_count || 0;
+                const poApprovedEdCount = processData.po_approved_ed_count || 0;
+                const totalPoPending = poCreatedCount + poApprovedHodCount + poApprovedEdCount;
+                const resultStringpo = `${poCreatedCount} + ${poApprovedHodCount} + ${poApprovedEdCount} = ${totalPoPending}`;
+                document.getElementById("Proposal_Request_pending").innerText = resultStringpo;
+                document.getElementById("HARISH_process_name").innerText = processData.HARISH_process;
+                document.getElementById("HARISH_process_task_count").innerText = processData.HARISH_process_task_count;
+                document.getElementById("HARISH_process_acti_count").innerText = processData.HARISH_process_acti_count;
+                document.getElementById("HARISH_process_absent_count").innerText = processData.HARISH_process_absent_count;
+                document.getElementById("HARISH_process_Late_count").innerText = processData.HARISH_process_Late_count;
+                document.getElementById("HARISH_process_task_score").innerText = processData.HARISH_process_task_score;
+                const HARISH_process_positive_inc_count = processData.HARISH_process_positive_inc_count || 0;
+                const HARISH_process_negative_inc_count = processData.HARISH_process_negative_inc_count || 0;
+                const HARISH_process_total_inc_count = HARISH_process_positive_inc_count + HARISH_process_negative_inc_count;
+                const HARISH_process_incident = `pos ${HARISH_process_positive_inc_count} + neg ${HARISH_process_negative_inc_count} = ${HARISH_process_total_inc_count}`;
+                document.getElementById("HARISH_process_incident").innerText = HARISH_process_incident;
+
+                document.getElementById("KEERTHANA_process_name").innerText = processData.KEERTHANA_process;
+                document.getElementById("KEERTHANA_process_task_count").innerText = processData.KEERTHANA_process_task_count;
+                document.getElementById("KEERTHANA_process_acti_count").innerText = processData.KEERTHANA_process_acti_count;
+                document.getElementById("KEERTHANA_process_absent_count").innerText = processData.KEERTHANA_process_absent_count;
+                document.getElementById("KEERTHANA_process_Late_count").innerText = processData.KEERTHANA_process_Late_count;
+                document.getElementById("KEERTHANA_process_task_score").innerText = processData.KEERTHANA_process_task_score;
+                const KEERTHANA_process_positive_inc_count = processData.KEERTHANA_process_positive_inc_count || 0;
+                const KEERTHANA_process_negative_inc_count = processData.KEERTHANA_process_negative_inc_count || 0;
+                const KEERTHANA_process_total_inc_count = KEERTHANA_process_positive_inc_count + KEERTHANA_process_negative_inc_count;
+                const KEERTHANA_process_incident = `pos ${KEERTHANA_process_positive_inc_count} + neg ${KEERTHANA_process_negative_inc_count} = ${KEERTHANA_process_total_inc_count}`;
+                document.getElementById("KEERTHANA_process_incident").innerText = KEERTHANA_process_incident;
+
+
+                document.getElementById("ATHISH_process_name").innerText = processData.ATHISH_process;
+                document.getElementById("ATHISH_process_task_count").innerText = processData.ATHISH_process_task_count;
+                document.getElementById("ATHISH_process_acti_count").innerText = processData.ATHISH_process_acti_count;
+                document.getElementById("ATHISH_process_absent_count").innerText = processData.ATHISH_process_absent_count;
+                document.getElementById("ATHISH_process_Late_count").innerText = processData.ATHISH_process_Late_count;
+                document.getElementById("ATHISH_process_task_score").innerText = processData.ATHISH_process_task_score;
+                const ATHISH_process_positive_inc_count = processData.ATHISH_process_positive_inc_count || 0;
+                const ATHISH_process_negative_inc_count = processData.ATHISH_process_negative_inc_count || 0;
+                const ATHISH_process_total_inc_count = ATHISH_process_positive_inc_count + ATHISH_process_negative_inc_count;
+                const ATHISH_process_incident = `pos ${ATHISH_process_positive_inc_count} + neg ${ATHISH_process_negative_inc_count} = ${ATHISH_process_total_inc_count}`;
+                document.getElementById("ATHISH_process_incident").innerText = ATHISH_process_incident;
+
+
+
+                document.getElementById("SANJEY_process_name").innerText = processData.SANJEY_process;
+                document.getElementById("SANJEY_process_task_count").innerText = processData.SANJEY_process_task_count;
+                document.getElementById("SANJEY_process_acti_count").innerText = processData.SANJEY_process_acti_count;
+                document.getElementById("SANJEY_process_absent_count").innerText = processData.SANJEY_process_absent_count;
+                document.getElementById("SANJEY_process_Late_count").innerText = processData.SANJEY_process_Late_count;
+                document.getElementById("SANJEY_process_task_score").innerText = processData.SANJEY_process_task_score;
+                const SANJEY_process_positive_inc_count = processData.SANJEY_process_positive_inc_count || 0;
+                const SANJEY_process_negative_inc_count = processData.SANJEY_process_negative_inc_count || 0;
+                const SANJEY_process_total_inc_count = SANJEY_process_positive_inc_count + SANJEY_process_negative_inc_count;
+                const SANJEY_process_incident = `pos ${SANJEY_process_positive_inc_count} + neg ${SANJEY_process_negative_inc_count} = ${SANJEY_process_total_inc_count}`;
+                document.getElementById("SANJEY_process_incident").innerText = SANJEY_process_incident;
+
+
+                document.getElementById("NAVEEN_process_name").innerText = processData.NAVEEN_process;
+                document.getElementById("NAVEEN_process_task_count").innerText = processData.NAVEEN_process_task_count;
+                document.getElementById("NAVEEN_process_acti_count").innerText = processData.NAVEEN_process_acti_count;
+                document.getElementById("NAVEEN_process_absent_count").innerText = processData.NAVEEN_process_absent_count;
+                document.getElementById("NAVEEN_process_Late_count").innerText = processData.NAVEEN_process_Late_count;
+                document.getElementById("NAVEEN_process_task_score").innerText = processData.NAVEEN_process_task_score;
+                const NAVEEN_process_positive_inc_count = processData.NAVEEN_process_positive_inc_count || 0;
+                const NAVEEN_process_negative_inc_count = processData.NAVEEN_process_negative_inc_count || 0;
+                const NAVEEN_process_total_inc_count = NAVEEN_process_positive_inc_count + NAVEEN_process_negative_inc_count;
+                const NAVEEN_process_incident = `pos ${NAVEEN_process_positive_inc_count} + neg ${NAVEEN_process_negative_inc_count} = ${NAVEEN_process_total_inc_count}`;
+                document.getElementById("NAVEEN_process_incident").innerText = NAVEEN_process_incident;
+
+
+
+                document.getElementById("MOUNIKA_process_name").innerText = processData.MOUNIKA_process;
+                document.getElementById("MOUNIKA_process_task_count").innerText = processData.MOUNIKA_process_task_count;
+                document.getElementById("MOUNIKA_process_acti_count").innerText = processData.MOUNIKA_process_acti_count;
+                document.getElementById("MOUNIKA_process_absent_count").innerText = processData.MOUNIKA_process_absent_count;
+                document.getElementById("MOUNIKA_process_Late_count").innerText = processData.MOUNIKA_process_Late_count;
+                document.getElementById("MOUNIKA_process_task_score").innerText = processData.MOUNIKA_process_task_score;
+                const MOUNIKA_process_positive_inc_count = processData.MOUNIKA_process_positive_inc_count || 0;
+                const MOUNIKA_process_negative_inc_count = processData.MOUNIKA_process_negative_inc_count || 0;
+                const MOUNIKA_process_total_inc_count = MOUNIKA_process_positive_inc_count + MOUNIKA_process_negative_inc_count;
+                const MOUNIKA_process_incident = `pos ${MOUNIKA_process_positive_inc_count} + neg ${MOUNIKA_process_negative_inc_count} = ${MOUNIKA_process_total_inc_count}`;
+                document.getElementById("MOUNIKA_process_incident").innerText = MOUNIKA_process_incident;
+
+
+
+                document.getElementById("ADHI_SHANKAR_process_name").innerText = processData.ADHI_SHANKAR_process;
+                document.getElementById("ADHI_SHANKAR_process_task_count").innerText = processData.ADHI_SHANKAR_process_task_count;
+                document.getElementById("ADHI_SHANKAR_process_acti_count").innerText = processData.ADHI_SHANKAR_process_acti_count;
+                document.getElementById("ADHI_SHANKAR_process_absent_count").innerText = processData.ADHI_SHANKAR_process_absent_count;
+                document.getElementById("ADHI_SHANKAR_process_Late_count").innerText = processData.ADHI_SHANKAR_process_Late_count;
+                document.getElementById("ADHI_SHANKAR_process_task_score").innerText = processData.ADHI_SHANKAR_process_task_score;
+                const ADHI_SHANKAR_process_positive_inc_count = processData.ADHI_SHANKAR_process_positive_inc_count || 0;
+                const ADHI_SHANKAR_process_negative_inc_count = processData.ADHI_SHANKAR_process_negative_inc_count || 0;
+                const ADHI_SHANKAR_process_total_inc_count = ADHI_SHANKAR_process_positive_inc_count + ADHI_SHANKAR_process_negative_inc_count;
+                const ADHI_SHANKAR_process_incident = `pos ${ADHI_SHANKAR_process_positive_inc_count} + neg ${ADHI_SHANKAR_process_negative_inc_count} = ${ADHI_SHANKAR_process_total_inc_count}`;
+                document.getElementById("ADHI_SHANKAR_process_incident").innerText = ADHI_SHANKAR_process_incident;
+
+
+
+                document.getElementById("MANIKANDAN_process_name").innerText = processData.MANIKANDAN_process;
+                document.getElementById("MANIKANDAN_process_task_count").innerText = processData.MANIKANDAN_process_task_count;
+                document.getElementById("MANIKANDAN_process_acti_count").innerText = processData.MANIKANDAN_process_acti_count;
+                document.getElementById("MANIKANDAN_process_absent_count").innerText = processData.MANIKANDAN_process_absent_count;
+                document.getElementById("MANIKANDAN_process_Late_count").innerText = processData.MANIKANDAN_process_Late_count;
+                document.getElementById("MANIKANDAN_process_task_score").innerText = processData.MANIKANDAN_process_task_score;
+                const MANIKANDAN_process_positive_inc_count = processData.MANIKANDAN_process_positive_inc_count || 0;
+                const MANIKANDAN_process_negative_inc_count = processData.MANIKANDAN_process_negative_inc_count || 0;
+                const MANIKANDAN_process_total_inc_count = MANIKANDAN_process_positive_inc_count + MANIKANDAN_process_negative_inc_count;
+                const MANIKANDAN_process_incident = `pos ${MANIKANDAN_process_positive_inc_count} + neg ${MANIKANDAN_process_negative_inc_count} = ${MANIKANDAN_process_total_inc_count}`;
+                document.getElementById("MANIKANDAN_process_incident").innerText = MANIKANDAN_process_incident;
+
+          
+
+               
+            }
+        };
+    </script>
+</body>
+</html>

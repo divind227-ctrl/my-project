@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accounts_emp_details</title>
+    <style>
+        /* Main container for both sides */
+        .main-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 40px;
+            padding-left: 20px;
+            padding-top: 120px;
+        }
+        
+        /* Left and Right side containers */
+        .left-side-container, .right-side-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            flex: 1;
+        }
+        
+        /* Optionally, adjust the left side container margin for individual spacing */
+        .left-side-container {
+            margin-left: 30px;
+        }
+        
+        /* ID card styling */
+        .box {
+            width: 600px;
+            height: 200px;
+            gap: 20px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            display: flex;
+            padding: 15px;
+            align-items: center;
+        }
+        
+        .left-side {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-right: 20px;
+        }
+        
+        .photo img {
+            width: 75px;
+            height: 95px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+        
+        .hod {
+            font-size: 11px;
+            font-weight: bold;
+            margin-bottom: 0px;
+        }
+        
+        .name-score {
+            font-size: 11px;
+        }
+        
+        .table-container {
+            display: flex;
+            gap: 10px;
+            width: 100%;
+        }
+        
+        .table-container-pending {
+            display: flex;
+            gap: 10px;
+            width: 100%;
+        }
+        
+        table {
+            width: 50%;
+            height: 60px;
+            border-collapse: collapse;
+            padding: 8px;
+        }
+        
+        td {
+            border: 2px solid #ccc;
+            padding: 8px;
+            width: 50%;
+            font-size: 13px;
+        }
+        
+        /* Grid layout for the right side */
+        .right-side-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+        
+        /* Date form styling */
+        .date-form {
+            margin: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 12px;
+            display: flex;
+            gap: 10px;
+        }
+        
+        .date-container {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-start;
+        }
+        
+        .labels {
+            font-size: 12px;
+        }
+        
+        .date-input {
+            padding: 5px;
+            font-size: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        
+        .submit-button {
+            padding: 6px 12px;
+            font-size: 12px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        .submit-button:hover {
+            background-color: #45a049;
+        }
+
+
+        .center-div {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        /* Mobile view adjustments */
+        @media (max-width: 768px) {
+            .main-container {
+                flex-direction: column;
+                padding-left: 10px;
+                padding-top: 50px;
+            }
+        
+            /* Left and Right side containers */
+            .left-side-container, .right-side-container {
+                margin-left: 0;
+                flex: none;
+            }
+        
+            /* Adjusting ID card width */
+            .box {
+                width: 100%;
+                height: auto;
+                flex-direction: column;
+                padding: 10px;
+            }
+        
+            .photo img {
+                width: 80px;
+                height: 80px;
+                position: relative;
+                left: 200px;  /* Adjust this to shift the image to the right */
+            }
+        
+            .table-container {
+                flex-direction: column;
+                width: 100%;
+            }
+        
+            .table-container-pending {
+                flex-direction: column;
+                width: 100%;
+            }
+        
+            table {
+                width: 100%;
+                height: auto;
+                border-collapse: collapse; /* Ensures borders collapse neatly */
+            }
+        
+            td {
+                width: 50%;
+                font-size: 12px;
+                padding: 10px; /* Increased padding for better spacing */
+                border: 1px solid #ccc;
+            }
+        
+            /* Adjust grid layout for smaller screens */
+            .right-side-container {
+                grid-template-columns: 1fr; /* Single column layout */
+            }
+        
+            /* Date form styling */
+            .date-form {
+                position: static;
+                margin: 20px 0;
+                padding: 10px;
+                width: 100%;
+            }
+        
+            .date-container {
+                flex-direction: column;
+            }
+        
+            .date-input {
+                width: 100%;
+            }
+        
+            .submit-button {
+                width: 100%;
+                padding: 6px 12px; /* Smaller padding */
+                font-size: 12px; /* Adjusted font size for better readability */
+            }
+        }
+        
+        @media (max-width: 480px) {
+            /* Further adjustments for very small screens */
+            .main-container {
+                padding-left: 5px;
+                padding-top: 30px;
+            }
+        
+            .box {
+                padding: 5px;
+            }
+        
+        
+            .hod, .name-score {
+                font-size: 7px;
+            }
+        
+            .submit-button {
+                width: 100%;
+                padding: 4px 8px; /* Smaller padding for very small screens */
+                font-size: 10px; /* Smaller font size */
+            }
+        
+            table {
+                width: 80%;
+                font-size: 10px;
+                border-collapse: collapse; /* Ensures borders collapse neatly */
+            }
+        
+            td {
+                font-size: 12px;
+                padding: 8px; /* Adjust padding to make content readable */
+                border: 1px solid #ccc;
+            }
+        
+            /* Adjust table cell padding for small screens */
+            table td {
+                padding: 8px; /* Increased padding for clarity */
+            }
+        }
+        
+        
+    </style>
+    
+</head>
+<body>
+    <!-- Date form for sMECHting from and to date, positioned at the top left -->
+    <form method="POST" action='/Accounts_emp_table' class="date-form">
+        <div class="date-container">
+            <div>
+                <label for="from-date" class="labels">From Date:</label>
+                <input type="date" id="from-date" name="from_date" class="date-input">
+            </div>
+            <div>
+                <label for="to-date" class="labels">To Date:</label>
+                <input type="date" id="to-date" name="to_date" class="date-input">
+            </div>
+        </div>
+        <button type="submit" class="submit-button">Submit</button>
+    </form>
+    <!-- Right side container (for 6 ID cards) -->
+    <div class="main-container">
+        <div class="right-side-container">
+            <!-- ID card #1 -->
+            <div class="box">
+                <div class="left-side">
+                    <div class="photo img">
+                        <img src="{{ url_for('static', filename='images/kar.jpg') }}" alt="ID Photo">
+                    </div>
+                    <div class="hod">HOD</div>
+                    <div class="name-score">
+                        <div id="KARTHI_ACC_name"></div>
+                        <div>Score: 85%</div>
+                    </div>
+                </div>
+                <div class="table-container">
+                    <table>
+                        <tr>
+                            <td>Task count:</td>
+                            <td><div id="KARTHI_ACC_task_count"></div></td>
+                        </tr>
+                        <tr>
+                            <td>Activities Sheet:</td>
+                            <td><div id="KARTHI_ACC_acti_count"></div></td>
+                        </tr>
+                        <tr>
+                            <td>Absent count:</td>
+                            <td><div id="KARTHI_ACC_absent_count"></div></td>
+                        </tr>
+                        <tr>
+                            <td>late count:</td>
+                            <td><div id="KARTHI_ACC_Late_count"></div></td>
+                        </tr>
+                    </table>
+
+                    <table>
+                        <tr>
+                            <td>Task score:</td>
+                            <td><div id="KARTHI_ACC_task_score"></div></td>
+                        </tr>
+                        <tr>
+                            <td>Journal Entry pending:</td>
+                            <td><div id="Journal_Entry"></div></td>
+                        </tr>
+                        <tr>
+                            <td>Purchase Invoice pending:</td>
+                            <td><div id="Purchase_Invoice"></div></td>
+                        </tr>
+                        <tr>
+                            <td>Payment Entry pending:</td>
+                            <td><div id="Payment_Entry"></div></td>
+                        </tr>
+                        <tr>
+                            <td>Incident count:</td>
+                            <td><div id="KARTHI_ACC_incident"></div></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- ID card #2 -->
+            <div class="box">
+                <div class="left-side">
+                    <div class="photo img">
+                        <img src="{{ url_for('static', filename='images/Nithyanandan.jpeg') }}" alt="ID Photo">
+                    </div>
+                    <div class="name-score">
+                        <div id="NITHYANANDAN_ACC_name"></div>
+                        <div>Score: 85%</div>
+                    </div>
+                </div>
+                <div class="table-container">
+                    <table>
+                        <tr>
+                            <td>Task count:</td>
+                            <td><div id="NITHYANANDAN_ACC_task_count"></div></td>
+                        </tr>
+                        <tr>
+                            <td>Activities Sheet:</td>
+                            <td><div id="NITHYANANDAN_ACC_acti_count"></div></td>
+                        </tr>
+                        <tr>
+                            <td>Absent count:</td>
+                            <td><div id="NITHYANANDAN_ACC_absent_count"></div></td>
+                        </tr>
+                        <tr>
+                            <td>late count:</td>
+                            <td><div id="NITHYANANDAN_ACC_Late_count"></div></td>
+                        </tr>
+                    </table>
+
+                    <table>
+                        <tr>
+                            <td>Task score:</td>
+                            <td><div id="NITHYANANDAN_ACC_task_score"></div></td>
+                        </tr>
+                        <tr>
+                            <td>Incident count:</td>
+                            <td><div id="NITHYANANDAN_ACC_incident"></div></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        window.onload = function() {
+            // The employee data passed from Flask
+            var AccountsData = {{ Accounts_data | tojson }};
+            
+            if (AccountsData) {
+                const pe_je = AccountsData.acc_je_pen || 0;
+                const com_je = AccountsData.acc_je_com || 0;
+                const total_je = pe_je + com_je;
+                const result_je =  `pen ${pe_je} + comp ${com_je} = ${total_je}`;
+                document.getElementById("Journal_Entry").innerText = result_je;
+
+                const pe_pi = AccountsData.acc_pi_pen || 0;
+                const com_pi = AccountsData.acc_pi_com || 0;
+                const total_pi = pe_pi + com_pi;
+                const result_pi =  `pen ${pe_pi} + comp ${com_pi} = ${total_pi}`;
+                document.getElementById("Purchase_Invoice").innerText = result_pi;
+
+                const pe_pe = AccountsData.acc_pe_pen || 0;
+                const com_pe = AccountsData.acc_pe_com || 0;
+                const total_pe = pe_pe + com_pe;
+                const result_pe =  `pen ${pe_pe} + comp ${com_pe} = ${total_pe}`;
+                document.getElementById("Payment_Entry").innerText = result_pe;
+
+                document.getElementById("KARTHI_ACC_name").innerText = AccountsData.KARTHI_ACC;
+                document.getElementById("KARTHI_ACC_task_count").innerText = AccountsData.KARTHI_ACC_task_count;
+                document.getElementById("KARTHI_ACC_acti_count").innerText = AccountsData.KARTHI_ACC_acti_count;
+                document.getElementById("KARTHI_ACC_absent_count").innerText = AccountsData.KARTHI_ACC_absent_count;
+                document.getElementById("KARTHI_ACC_Late_count").innerText = AccountsData.KARTHI_ACC_Late_count;
+                document.getElementById("KARTHI_ACC_task_score").innerText = AccountsData.KARTHI_ACC_task_score;
+                const KARTHI_ACC_positive_inc_count = AccountsData.KARTHI_ACC_positive_inc_count || 0;
+                const KARTHI_ACC_negative_inc_count = AccountsData.KARTHI_ACC_negative_inc_count || 0;
+                const KARTHI_ACC_total_inc_count = KARTHI_ACC_positive_inc_count + KARTHI_ACC_negative_inc_count;
+                const KARTHI_ACC_incident = `pos ${KARTHI_ACC_positive_inc_count} + neg ${KARTHI_ACC_negative_inc_count} = ${KARTHI_ACC_total_inc_count}`;
+                document.getElementById("KARTHI_ACC_incident").innerText = KARTHI_ACC_incident;
+
+
+                document.getElementById("NITHYANANDAN_ACC_name").innerText = AccountsData.NITHYANANDAN_ACC;
+                document.getElementById("NITHYANANDAN_ACC_task_count").innerText = AccountsData.NITHYANANDAN_ACC_task_count;
+                document.getElementById("NITHYANANDAN_ACC_acti_count").innerText = AccountsData.NITHYANANDAN_ACC_acti_count;
+                document.getElementById("NITHYANANDAN_ACC_absent_count").innerText = AccountsData.NITHYANANDAN_ACC_absent_count;
+                document.getElementById("NITHYANANDAN_ACC_Late_count").innerText = AccountsData.NITHYANANDAN_ACC_Late_count;
+                document.getElementById("NITHYANANDAN_ACC_task_score").innerText = AccountsData.NITHYANANDAN_ACC_task_score;
+                const NITHYANANDAN_ACC_positive_inc_count = AccountsData.NITHYANANDAN_ACC_positive_inc_count || 0;
+                const NITHYANANDAN_ACC_negative_inc_count = AccountsData.NITHYANANDAN_ACC_negative_inc_count || 0;
+                const NITHYANANDAN_ACC_total_inc_count = NITHYANANDAN_ACC_positive_inc_count + NITHYANANDAN_ACC_negative_inc_count;
+                const NITHYANANDAN_ACC_incident = `pos ${NITHYANANDAN_ACC_positive_inc_count} + neg ${NITHYANANDAN_ACC_negative_inc_count} = ${NITHYANANDAN_ACC_total_inc_count}`;
+                document.getElementById("NITHYANANDAN_ACC_incident").innerText = NITHYANANDAN_ACC_incident;
+
+
+            }
+        };
+    </script>
+</body>
+</html>

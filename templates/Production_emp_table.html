@@ -1,0 +1,1066 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Production</title>
+    <style>
+        /* Main container for both sides */
+        .main-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 40px;
+            padding-left: 20px;
+            padding-top: 100px;
+        }
+        
+        /* Left and Right side containers */
+        .left-side-container, .right-side-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            flex: 1;
+        }
+        
+        /* Optionally, adjust the left side container margin for individual spacing */
+        .left-side-container {
+            margin-left: 30px;
+        }
+        
+        /* ID card styling */
+        .box {
+            width: 600px;
+            height: 145px;
+            gap: 20px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            display: flex;
+            padding: 15px;
+            align-items: center;
+        }
+        
+        .left-side {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-right: 20px;
+        }
+        
+        .photo img {
+            width: 75px;
+            height: 95px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+        
+        .hod {
+            font-size: 11px;
+            font-weight: bold;
+            margin-bottom: 0px;
+        }
+        
+        .name-score {
+            font-size: 11px;
+        }
+        
+        .table-container {
+            display: flex;
+            gap: 10px;
+            width: 100%;
+        }
+        
+        .table-container-pending {
+            display: flex;
+            gap: 10px;
+            width: 100%;
+        }
+        
+        table {
+            width: 50%;
+            height: 60px;
+            border-collapse: collapse;
+            padding: 8px;
+        }
+        
+        td {
+            border: 2px solid #ccc;
+            padding: 8px;
+            width: 50%;
+            font-size: 13px;
+        }
+        
+        /* Grid layout for the right side */
+        .right-side-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+        
+        /* Date form styling */
+        .date-form {
+            margin: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 12px;
+            display: flex;
+            gap: 10px;
+        }
+        
+        .date-container {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-start;
+        }
+        
+        .labels {
+            font-size: 12px;
+        }
+        
+        .date-input {
+            padding: 5px;
+            font-size: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        
+        .submit-button {
+            padding: 6px 12px;
+            font-size: 12px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        .submit-button:hover {
+            background-color: #45a049;
+        }
+
+
+        .center-div {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        /* Mobile view adjustments */
+        @media (max-width: 768px) {
+            .main-container {
+                flex-direction: column;
+                padding-left: 10px;
+                padding-top: 50px;
+            }
+        
+            /* Left and Right side containers */
+            .left-side-container, .right-side-container {
+                margin-left: 0;
+                flex: none;
+            }
+        
+            /* Adjusting ID card width */
+            .box {
+                width: 100%;
+                height: auto;
+                flex-direction: column;
+                padding: 10px;
+            }
+        
+            .photo img {
+                width: 60px;
+                height: 80px;
+            }
+        
+            .table-container {
+                flex-direction: column;
+                width: 100%;
+            }
+        
+            .table-container-pending {
+                flex-direction: column;
+                width: 100%;
+            }
+        
+            table {
+                width: 100%;
+                height: auto;
+                border-collapse: collapse; /* Ensures borders collapse neatly */
+            }
+        
+            td {
+                width: 50%;
+                font-size: 12px;
+                padding: 10px; /* Increased padding for better spacing */
+                border: 1px solid #ccc;
+            }
+        
+            /* Adjust grid layout for smaller screens */
+            .right-side-container {
+                grid-template-columns: 1fr; /* Single column layout */
+            }
+        
+            /* Date form styling */
+            .date-form {
+                position: static;
+                margin: 20px 0;
+                padding: 10px;
+                width: 100%;
+            }
+        
+            .date-container {
+                flex-direction: column;
+            }
+        
+            .date-input {
+                width: 100%;
+            }
+        
+            .submit-button {
+                width: 100%;
+                padding: 6px 12px; /* Smaller padding */
+                font-size: 12px; /* Adjusted font size for better readability */
+            }
+        }
+        
+        @media (max-width: 480px) {
+            /* Further adjustments for very small screens */
+            .main-container {
+                padding-left: 5px;
+                padding-top: 30px;
+            }
+        
+            .box {
+                padding: 5px;
+            }
+        
+            .photo img {
+                width: 50px;
+                height: 70px;
+            }
+        
+            .hod, .name-score {
+                font-size: 7px;
+            }
+        
+            .submit-button {
+                width: 100%;
+                padding: 4px 8px; /* Smaller padding for very small screens */
+                font-size: 10px; /* Smaller font size */
+            }
+        
+            table {
+                width: 100%;
+                font-size: 12px;
+                border-collapse: collapse; /* Ensures borders collapse neatly */
+            }
+        
+            td {
+                font-size: 12px;
+                padding: 8px; /* Adjust padding to make content readable */
+                border: 1px solid #ccc;
+            }
+        
+            /* Adjust table cell padding for small screens */
+            table td {
+                padding: 8px; /* Increased padding for clarity */
+            }
+        }
+        
+        
+    </style>
+    
+</head>
+<body>
+    <!-- Date form for selecting from and to date, positioned at the top left -->
+    <form method="POST" action='/Production_emp_table' class="date-form">
+        <div class="date-container">
+            <div>
+                <label for="from-date" class="labels">From Date:</label>
+                <input type="date" id="from-date" name="from_date" class="date-input">
+            </div>
+            <div>
+                <label for="to-date" class="labels">To Date:</label>
+                <input type="date" id="to-date" name="to_date" class="date-input">
+            </div>
+        </div>
+        <button type="submit" class="submit-button">Submit</button>
+    </form>
+    <!-- Right side container (for 6 boxs) -->
+    <div class="main-container">
+        <div class="right-side-container">
+            <!-- box #1 -->
+            <div class="box">
+                <div class="left-side">
+                    <div class="photo">
+                        <img src="{{ url_for('static', filename='images/Ajith s Shop floor incharge 2021-08-16 at 12.23.31 PM.jpeg') }}" alt="ID Photo">
+                    </div>
+                    <div class="hod">HOD</div>
+                    <div class="name-score">
+                        <div id="AJITHS_Produ_name"></div>
+                        <div>Score: 85%</div>
+                    </div>
+                </div>
+                <div class="table-container">
+                    <table>
+                        <tr>
+                            <td>Task count:</td>
+                            <td><div id="AJITHS_Produ_task_count"></div></td>
+                        </tr>
+                        <tr>
+                            <td>Activities Sheet:</td>
+                            <td><div id="AJITHS_Produ_acti_count"></div></td>
+                        </tr>
+                        <tr>
+                            <td>Absent count:</td>
+                            <td><div id="AJITHS_Produ_absent_count"></div></td>
+                        </tr>
+                        <tr>
+                            <td>Late count:</td>
+                            <td><div id="AJITHS_Produ_Late_count"></div></td>
+                        </tr>
+                    </table>
+
+                    <table>
+                        <tr>
+                            <td>Task score:</td>
+                            <td><div id="AJITHS_Produ_task_score"></div></td>
+                        </tr>
+                        <tr>
+                            <td>Incident count:</td>
+                            <td><div id="AJITHS_Produ_incident"></div></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- box #2 -->
+            <div class="box">
+                <div class="left-side">
+                    <div class="photo">
+                    </div>
+                    <div class="name-score">
+                        <div id="VIVEKPRAKASH_Produ_name"></div>
+                        <div>Score: 85%</div>
+                    </div>
+                </div>
+                <div class="table-container">
+                    <table>
+                        <tr>
+                            <td>Task count:</td>
+                            <td><div id="VIVEKPRAKASH_Produ_task_count"></div></td>
+                        </tr>
+                        <tr>
+                            <td>Activities Sheet:</td>
+                            <td><div id="VIVEKPRAKASH_Produ_acti_count"></div></td>
+                        </tr>
+                        <tr>
+                            <td>Absent count:</td>
+                            <td><div id="VIVEKPRAKASH_Produ_absent_count"></div></td>
+                        </tr>
+                        <tr>
+                            <td>Late count:</td>
+                            <td><div id="VIVEKPRAKASH_Produ_Late_count"></div></td>
+                        </tr>
+                    </table>
+
+                    <table>
+                        <tr>
+                            <td>Task score:</td>
+                            <td><div id="VIVEKPRAKASH_Produ_task_score"></div></td>
+                        </tr>
+                        <tr>
+                            <td>Incident count:</td>
+                            <td><div id="VIVEKPRAKASH_Produ_incident"></div></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- box #3 -->
+            <div class="box">
+                <div class="left-side">
+                    <div class="photo">
+                    </div>
+                    <div class="name-score">
+                        <div id="RAMKUMARM_Produ_name"></div>
+                        <div>Score: 85%</div>
+                    </div>
+                </div>
+                <div class="table-container">
+                    <table>
+                        <tr>
+                            <td>Task count:</td>
+                            <td><div id="RAMKUMARM_Produ_task_count"></div></td>
+                        </tr>
+                        <tr>
+                            <td>Activities Sheet:</td>
+                            <td><div id="RAMKUMARM_Produ_acti_count"></div></td>
+                        </tr>
+                        <tr>
+                            <td>Absent count:</td>
+                            <td><div id="RAMKUMARM_Produ_absent_count"></div></td>
+                        </tr>
+                        <tr>
+                            <td>Late count:</td>
+                            <td><div id="RAMKUMARM_Produ_Late_count"></div></td>
+                        </tr>
+                    </table>
+
+                    <table>
+                        <tr>
+                            <td>Task score:</td>
+                            <td><div id="RAMKUMARM_Produ_task_score"></div></td>
+                        </tr>
+                        <tr>
+                            <td>Incident count:</td>
+                            <td><div id="RAMKUMARM_Produ_incident"></div></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- box #4 -->
+            <div class="box">
+                <div class="left-side">
+                    <div class="photo">
+                        <img src="{{ url_for('static', filename='images/Aravindhan A.jpeg') }}" alt="ID Photo">
+                    </div>
+                    <div class="name-score">
+                        <div id="ARAVINDHANA_Produ_name"></div>
+                        <div>Score: 85%</div>
+                    </div>
+                </div>
+                <div class="table-container">
+                    <table>
+                        <tr>
+                            <td>Task count:</td>
+                            <td><div id="ARAVINDHANA_Produ_task_count"></div></td>
+                        </tr>
+                        <tr>
+                            <td>Activities Sheet:</td>
+                            <td><div id="ARAVINDHANA_Produ_acti_count"></div></td>
+                        </tr>
+                        <tr>
+                            <td>Absent count:</td>
+                            <td><div id="ARAVINDHANA_Produ_absent_count"></div></td>
+                        </tr>
+                        <tr>
+                            <td>Late count:</td>
+                            <td><div id="ARAVINDHANA_Produ_Late_count"></div></td>
+                        </tr>
+                    </table>
+
+                    <table>
+                        <tr>
+                            <td>Task score:</td>
+                            <td><div id="ARAVINDHANA_Produ_task_score"></div></td>
+                        </tr>
+                        <tr>
+                            <td>Incident count:</td>
+                            <td><div id="ARAVINDHANA_Produ_incident"></div></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- box #5 -->
+            <div class="box">
+                <div class="left-side">
+                    <div class="photo">
+                        <img src="{{ url_for('static', filename='images/Shrikanthan.jpeg') }}" alt="ID Photo">
+                    </div>
+                    <div class="name-score">
+                        <div id="SHRIKANTHANM_Produ_name"></div>
+                        <div>Score: 85%</div>
+                    </div>
+                </div>
+                <div class="table-container">
+                    <table>
+                        <tr>
+                            <td>Task count:</td>
+                            <td><div id="SHRIKANTHANM_Produ_task_count"></div></td>
+                        </tr>
+                        <tr>
+                            <td>Activities Sheet:</td>
+                            <td><div id="SHRIKANTHANM_Produ_acti_count"></div></td>
+                        </tr>
+                        <tr>
+                            <td>Absent count:</td>
+                            <td><div id="SHRIKANTHANM_Produ_absent_count"></div></td>
+                        </tr>
+                        <tr>
+                            <td>Late count:</td>
+                            <td><div id="SHRIKANTHANM_Produ_Late_count"></div></td>
+                        </tr>
+                    </table>
+
+                    <table>
+                        <tr>
+                            <td>Task score:</td>
+                            <td><div id="SHRIKANTHANM_Produ_task_score"></div></td>
+                        </tr>
+                        <tr>
+                            <td>Incident count:</td>
+                            <td><div id="SHRIKANTHANM_Produ_incident"></div></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- box #6 -->
+            <div class="box">
+                <div class="left-side">
+                    <div class="photo">
+                        <img src="{{ url_for('static', filename='images/Nagamanikkam.jpg') }}" alt="ID Photo">
+                    </div>
+                    <div class="name-score">
+                        <div id="NAGAMANIKKAMR_Produ_name"></div>
+                        <div>Score: 85%</div>
+                    </div>
+                </div>
+                <div class="table-container">
+                    <table>
+                        <tr>
+                            <td>Task count:</td>
+                            <td><div id="NAGAMANIKKAMR_Produ_task_count"></div></td>
+                        </tr>
+                        <tr>
+                            <td>Activities Sheet:</td>
+                            <td><div id="NAGAMANIKKAMR_Produ_acti_count"></div></td>
+                        </tr>
+                        <tr>
+                            <td>Absent count:</td>
+                            <td><div id="NAGAMANIKKAMR_Produ_absent_count"></div></td>
+                        </tr>
+                        <tr>
+                            <td>Late count:</td>
+                            <td><div id="NAGAMANIKKAMR_Produ_Late_count"></div></td>
+                        </tr>
+                    </table>
+
+                    <table>
+                        <tr>
+                            <td>Task score:</td>
+                            <td><div id="NAGAMANIKKAMR_Produ_task_score"></div></td>
+                        </tr>
+                        <tr>
+                            <td>Incident count:</td>
+                            <td><div id="NAGAMANIKKAMR_Produ_incident"></div></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+             <!-- box #7 -->
+
+            <div class="box">
+                <div class="left-side">
+                    <div class="photo">
+                        <img src="{{ url_for('static', filename='images/Prakash C - Fitter.jpg') }}" alt="ID Photo">
+                    </div>
+                    <div class="name-score">
+                        <div id="PRAKASHC_Produ_name"></div>
+                        <div>Score: 85%</div>
+                    </div>
+                </div>
+                <div class="table-container">
+                    <table>
+                        <tr>
+                            <td>Task count:</td>
+                            <td><div id="PRAKASHC_Produ_task_count"></div></td>
+                        </tr>
+                        <tr>
+                            <td>Activities Sheet:</td>
+                            <td><div id="PRAKASHC_Produ_acti_count"></div></td>
+                        </tr>
+                        <tr>
+                            <td>Absent count:</td>
+                            <td><div id="PRAKASHC_Produ_absent_count"></div></td>
+                        </tr>
+                        <tr>
+                            <td>Late count:</td>
+                            <td><div id="PRAKASHC_Produ_Late_count"></div></td>
+                        </tr>
+                    </table>
+
+                    <table>
+                        <tr>
+                            <td>Task score:</td>
+                            <td><div id="PRAKASHC_Produ_task_score"></div></td>
+                        </tr>
+                        <tr>
+                            <td>Incident count:</td>
+                            <td><div id="PRAKASHC_Produ_incident"></div></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+
+             <!-- box #8 -->
+
+            <div class="box">
+                <div class="left-side">
+                    <div class="photo">
+                        <img src="{{ url_for('static', filename='images/Arun.R.P.jpeg') }}" alt="ID Photo">
+                    </div>
+                    <div class="name-score">
+                        <div id="ARUN_Produ_name"></div>
+                        <div>Score: 85%</div>
+                    </div>
+                </div>
+                <div class="table-container">
+                    <table>
+                        <tr>
+                            <td>Task count:</td>
+                            <td><div id="ARUN_Produ_task_count"></div></td>
+                        </tr>
+                        <tr>
+                            <td>Activities Sheet:</td>
+                            <td><div id="ARUN_Produ_acti_count"></div></td>
+                        </tr>
+                        <tr>
+                            <td>Absent count:</td>
+                            <td><div id="ARUN_Produ_absent_count"></div></td>
+                        </tr>
+                        <tr>
+                            <td>Late count:</td>
+                            <td><div id="ARUN_Produ_Late_count"></div></td>
+                        </tr>
+                    </table>
+
+                    <table>
+                        <tr>
+                            <td>Task score:</td>
+                            <td><div id="ARUN_Produ_task_score"></div></td>
+                        </tr>
+                        <tr>
+                            <td>Incident count:</td>
+                            <td><div id="ARUN_Produ_incident"></div></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+           <!-- box #9 -->
+
+            <div class="box">
+                <div class="left-side">
+                    <div class="photo">
+                        <img src="{{ url_for('static', filename='images/Sakthivel  M .jpg') }}" alt="ID Photo">
+                    </div>
+                    <div class="name-score">
+                        <div id="SAKTHIVELM_Produ_name"></div>
+                        <div>Score: 85%</div>
+                    </div>
+                </div>
+                <div class="table-container">
+                    <table>
+                        <tr>
+                            <td>Task count:</td>
+                            <td><div id="SAKTHIVELM_Produ_task_count"></div></td>
+                        </tr>
+                        <tr>
+                            <td>Activities Sheet:</td>
+                            <td><div id="SAKTHIVELM_Produ_acti_count"></div></td>
+                        </tr>
+                        <tr>
+                            <td>Absent count:</td>
+                            <td><div id="SAKTHIVELM_Produ_absent_count"></div></td>
+                        </tr>
+                        <tr>
+                            <td>Late count:</td>
+                            <td><div id="SAKTHIVELM_Produ_Late_count"></div></td>
+                        </tr>
+                    </table>
+
+                    <table>
+                        <tr>
+                            <td>Task score:</td>
+                            <td><div id="SAKTHIVELM_Produ_task_score"></div></td>
+                        </tr>
+                        <tr>
+                            <td>Incident count:</td>
+                            <td><div id="SAKTHIVELM_Produ_incident"></div></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- box #10 -->
+            <div class="box">
+                <div class="left-side">
+                    <div class="photo">
+                        <img src="{{ url_for('static', filename='images/Paul ranjith 928.jpg') }}" alt="ID Photo">
+                    </div>
+                    <div class="name-score">
+                        <div id="PAULRANJITH_Produ_name"></div>
+                        <div>Score: 85%</div>
+                    </div>
+                </div>
+                <div class="table-container">
+                    <table>
+                        <tr>
+                            <td>Task count:</td>
+                            <td><div id="PAULRANJITH_Produ_task_count"></div></td>
+                        </tr>
+                        <tr>
+                            <td>Activities Sheet:</td>
+                            <td><div id="PAULRANJITH_Produ_acti_count"></div></td>
+                        </tr>
+                        <tr>
+                            <td>Absent count:</td>
+                            <td><div id="PAULRANJITH_Produ_absent_count"></div></td>
+                        </tr>
+                        <tr>
+                            <td>Late count:</td>
+                            <td><div id="PAULRANJITH_Produ_Late_count"></div></td>
+                        </tr>
+                    </table>
+
+                    <table>
+                        <tr>
+                            <td>Task score:</td>
+                            <td><div id="PAULRANJITH_Produ_task_score"></div></td>
+                        </tr>
+                        <tr>
+                            <td>Incident count:</td>
+                            <td><div id="PAULRANJITH_Produ_incident"></div></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- box #11 -->
+            <div class="box">
+                <div class="left-side">
+                    <div class="photo">
+                        <img src="{{ url_for('static', filename='images/Gowtham surya prakash.jpg') }}" alt="ID Photo">
+                    </div>
+                    <div class="name-score">
+                        <div id="GOWTHAMSURYAPRAKASH_Produ_name"></div>
+                        <div>Score: 85%</div>
+                    </div>
+                </div>
+                <div class="table-container">
+                    <table>
+                        <tr>
+                            <td>Task count:</td>
+                            <td><div id="GOWTHAMSURYAPRAKASH_Produ_task_count"></div></td>
+                        </tr>
+                        <tr>
+                            <td>Activities Sheet:</td>
+                            <td><div id="GOWTHAMSURYAPRAKASH_Produ_acti_count"></div></td>
+                        </tr>
+                        <tr>
+                            <td>Absent count:</td>
+                            <td><div id="GOWTHAMSURYAPRAKASH_Produ_absent_count"></div></td>
+                        </tr>
+                        <tr>
+                            <td>Late count:</td>
+                            <td><div id="GOWTHAMSURYAPRAKASH_Produ_Late_count"></div></td>
+                        </tr>
+                    </table>
+
+                    <table>
+                        <tr>
+                            <td>Task score:</td>
+                            <td><div id="GOWTHAMSURYAPRAKASH_Produ_task_score"></div></td>
+                        </tr>
+                        <tr>
+                            <td>Incident count:</td>
+                            <td><div id="GOWTHAMSURYAPRAKASH_Produ_incident"></div></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+             <!-- box #12 -->
+
+             <div class="box">
+                <div class="left-side">
+                    <div class="photo">
+                        <img src="{{ url_for('static', filename='images/Karthi T.jpg') }}" alt="ID Photo">
+                    </div>
+                    <div class="name-score">
+                        <div id="KARTHIT_Produ_name"></div>
+                        <div>Score: 85%</div>
+                    </div>
+                </div>
+                <div class="table-container">
+                    <table>
+                        <tr>
+                            <td>Task count:</td>
+                            <td><div id="KARTHIT_Produ_task_count"></div></td>
+                        </tr>
+                        <tr>
+                            <td>Activities Sheet:</td>
+                            <td><div id="KARTHIT_Produ_acti_count"></div></td>
+                        </tr>
+                        <tr>
+                            <td>Absent count:</td>
+                            <td><div id="KARTHIT_Produ_absent_count"></div></td>
+                        </tr>
+                        <tr>
+                            <td>Late count:</td>
+                            <td><div id="KARTHIT_Produ_Late_count"></div></td>
+                        </tr>
+                    </table>
+
+                    <table>
+                        <tr>
+                            <td>Task score:</td>
+                            <td><div id="KARTHIT_Produ_task_score"></div></td>
+                        </tr>
+                        <tr>
+                            <td>Incident count:</td>
+                            <td><div id="KARTHIT_Produ_incident"></div></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+
+             <!-- box #13 -->
+
+             <div class="box">
+                <div class="left-side">
+                    <div class="photo">
+                    </div>
+                    <div class="name-score">
+                        <div id="BALASUBRAMANI_Produ_name"></div>
+                        <div>Score: 85%</div>
+                    </div>
+                </div>
+                <div class="table-container">
+                    <table>
+                        <tr>
+                            <td>Task count:</td>
+                            <td><div id="BALASUBRAMANI_Produ_task_count"></div></td>
+                        </tr>
+                        <tr>
+                            <td>Activities Sheet:</td>
+                            <td><div id="BALASUBRAMANI_Produ_acti_count"></div></td>
+                        </tr>
+                        <tr>
+                            <td>Absent count:</td>
+                            <td><div id="BALASUBRAMANI_Produ_absent_count"></div></td>
+                        </tr>
+                        <tr>
+                            <td>Late count:</td>
+                            <td><div id="BALASUBRAMANI_Produ_Late_count"></div></td>
+                        </tr>
+                    </table>
+
+                    <table>
+                        <tr>
+                            <td>Task score:</td>
+                            <td><div id="BALASUBRAMANI_Produ_task_score"></div></td>
+                        </tr>
+                        <tr>
+                            <td>Incident count:</td>
+                            <td><div id="BALASUBRAMANI_Produ_incident"></div></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        window.onload = function() {
+            // The employee data passed from Flask
+            var ProductionData = {{ Production_data | tojson }};
+            
+            if (ProductionData) {
+
+                document.getElementById("AJITHS_Produ_name").innerText = ProductionData.AJITHS_Produ;
+                document.getElementById("AJITHS_Produ_task_count").innerText = ProductionData.AJITHS_Produ_task_count;
+                document.getElementById("AJITHS_Produ_acti_count").innerText = ProductionData.AJITHS_Produ_acti_count;
+                document.getElementById("AJITHS_Produ_absent_count").innerText = ProductionData.AJITHS_Produ_absent_count;
+                document.getElementById("AJITHS_Produ_Late_count").innerText = ProductionData.AJITHS_Produ_Late_count;
+                document.getElementById("AJITHS_Produ_task_score").innerText = ProductionData.AJITHS_Produ_task_score;
+                const AJITHS_Produ_positive_inc_count = ProductionData.AJITHS_Produ_positive_inc_count || 0;
+                const AJITHS_Produ_negative_inc_count = ProductionData.AJITHS_Produ_negative_inc_count || 0;
+                const AJITHS_Produ_total_inc_count = AJITHS_Produ_positive_inc_count + AJITHS_Produ_negative_inc_count;
+                const AJITHS_Produ_incident = `pos ${AJITHS_Produ_positive_inc_count} + neg ${AJITHS_Produ_negative_inc_count} = ${AJITHS_Produ_total_inc_count}`;
+                document.getElementById("AJITHS_Produ_incident").innerText = AJITHS_Produ_incident;
+
+                document.getElementById("VIVEKPRAKASH_Produ_name").innerText = ProductionData.VIVEKPRAKASH_Produ;
+                document.getElementById("VIVEKPRAKASH_Produ_task_count").innerText = ProductionData.VIVEKPRAKASH_Produ_task_count;
+                document.getElementById("VIVEKPRAKASH_Produ_acti_count").innerText = ProductionData.VIVEKPRAKASH_Produ_acti_count;
+                document.getElementById("VIVEKPRAKASH_Produ_absent_count").innerText = ProductionData.VIVEKPRAKASH_Produ_absent_count;
+                document.getElementById("VIVEKPRAKASH_Produ_Late_count").innerText = ProductionData.VIVEKPRAKASH_Produ_Late_count;
+                document.getElementById("VIVEKPRAKASH_Produ_task_score").innerText = ProductionData.VIVEKPRAKASH_Produ_task_score;
+                const VIVEKPRAKASH_Produ_positive_inc_count = ProductionData.VIVEKPRAKASH_Produ_positive_inc_count || 0;
+                const VIVEKPRAKASH_Produ_negative_inc_count = ProductionData.VIVEKPRAKASH_Produ_negative_inc_count || 0;
+                const VIVEKPRAKASH_Produ_total_inc_count = VIVEKPRAKASH_Produ_positive_inc_count + VIVEKPRAKASH_Produ_negative_inc_count;
+                const VIVEKPRAKASH_Produ_incident = `pos ${VIVEKPRAKASH_Produ_positive_inc_count} + neg ${VIVEKPRAKASH_Produ_negative_inc_count} = ${VIVEKPRAKASH_Produ_total_inc_count}`;
+                document.getElementById("VIVEKPRAKASH_Produ_incident").innerText = VIVEKPRAKASH_Produ_incident;
+
+
+                document.getElementById("RAMKUMARM_Produ_name").innerText = ProductionData.RAMKUMARM_Produ;
+                document.getElementById("RAMKUMARM_Produ_task_count").innerText = ProductionData.RAMKUMARM_Produ_task_count;
+                document.getElementById("RAMKUMARM_Produ_acti_count").innerText = ProductionData.RAMKUMARM_Produ_acti_count;
+                document.getElementById("RAMKUMARM_Produ_absent_count").innerText = ProductionData.RAMKUMARM_Produ_absent_count;
+                document.getElementById("RAMKUMARM_Produ_Late_count").innerText = ProductionData.RAMKUMARM_Produ_Late_count;
+                document.getElementById("RAMKUMARM_Produ_task_score").innerText = ProductionData.RAMKUMARM_Produ_task_score;
+                const RAMKUMARM_Produ_positive_inc_count = ProductionData.RAMKUMARM_Produ_positive_inc_count || 0;
+                const RAMKUMARM_Produ_negative_inc_count = ProductionData.RAMKUMARM_Produ_negative_inc_count || 0;
+                const RAMKUMARM_Produ_total_inc_count = RAMKUMARM_Produ_positive_inc_count + RAMKUMARM_Produ_negative_inc_count;
+                const RAMKUMARM_Produ_incident = `pos ${RAMKUMARM_Produ_positive_inc_count} + neg ${RAMKUMARM_Produ_negative_inc_count} = ${RAMKUMARM_Produ_total_inc_count}`;
+                document.getElementById("RAMKUMARM_Produ_incident").innerText = RAMKUMARM_Produ_incident;
+
+
+
+                document.getElementById("ARAVINDHANA_Produ_name").innerText = ProductionData.ARAVINDHANA_Produ;
+                document.getElementById("ARAVINDHANA_Produ_task_count").innerText = ProductionData.ARAVINDHANA_Produ_task_count;
+                document.getElementById("ARAVINDHANA_Produ_acti_count").innerText = ProductionData.ARAVINDHANA_Produ_acti_count;
+                document.getElementById("ARAVINDHANA_Produ_absent_count").innerText = ProductionData.ARAVINDHANA_Produ_absent_count;
+                document.getElementById("ARAVINDHANA_Produ_Late_count").innerText = ProductionData.ARAVINDHANA_Produ_Late_count;
+                document.getElementById("ARAVINDHANA_Produ_task_score").innerText = ProductionData.ARAVINDHANA_Produ_task_score;
+                const ARAVINDHANA_Produ_positive_inc_count = ProductionData.ARAVINDHANA_Produ_positive_inc_count || 0;
+                const ARAVINDHANA_Produ_negative_inc_count = ProductionData.ARAVINDHANA_Produ_negative_inc_count || 0;
+                const ARAVINDHANA_Produ_total_inc_count = ARAVINDHANA_Produ_positive_inc_count + ARAVINDHANA_Produ_negative_inc_count;
+                const ARAVINDHANA_Produ_incident = `pos ${ARAVINDHANA_Produ_positive_inc_count} + neg ${ARAVINDHANA_Produ_negative_inc_count} = ${ARAVINDHANA_Produ_total_inc_count}`;
+                document.getElementById("ARAVINDHANA_Produ_incident").innerText = ARAVINDHANA_Produ_incident;
+
+
+                document.getElementById("SHRIKANTHANM_Produ_name").innerText = ProductionData.SHRIKANTHANM_Produ;
+                document.getElementById("SHRIKANTHANM_Produ_task_count").innerText = ProductionData.SHRIKANTHANM_Produ_task_count;
+                document.getElementById("SHRIKANTHANM_Produ_acti_count").innerText = ProductionData.SHRIKANTHANM_Produ_acti_count;
+                document.getElementById("SHRIKANTHANM_Produ_absent_count").innerText = ProductionData.SHRIKANTHANM_Produ_absent_count;
+                document.getElementById("SHRIKANTHANM_Produ_Late_count").innerText = ProductionData.SHRIKANTHANM_Produ_Late_count;
+                document.getElementById("SHRIKANTHANM_Produ_task_score").innerText = ProductionData.SHRIKANTHANM_Produ_task_score;
+                const SHRIKANTHANM_Produ_positive_inc_count = ProductionData.SHRIKANTHANM_Produ_positive_inc_count || 0;
+                const SHRIKANTHANM_Produ_negative_inc_count = ProductionData.SHRIKANTHANM_Produ_negative_inc_count || 0;
+                const SHRIKANTHANM_Produ_total_inc_count = SHRIKANTHANM_Produ_positive_inc_count + SHRIKANTHANM_Produ_negative_inc_count;
+                const SHRIKANTHANM_Produ_incident = `pos ${SHRIKANTHANM_Produ_positive_inc_count} + neg ${SHRIKANTHANM_Produ_negative_inc_count} = ${SHRIKANTHANM_Produ_total_inc_count}`;
+                document.getElementById("SHRIKANTHANM_Produ_incident").innerText = SHRIKANTHANM_Produ_incident;
+
+
+
+                document.getElementById("PRAKASHC_Produ_name").innerText = ProductionData.PRAKASHC_Produ;
+                document.getElementById("PRAKASHC_Produ_task_count").innerText = ProductionData.PRAKASHC_Produ_task_count;
+                document.getElementById("PRAKASHC_Produ_acti_count").innerText = ProductionData.PRAKASHC_Produ_acti_count;
+                document.getElementById("PRAKASHC_Produ_absent_count").innerText = ProductionData.PRAKASHC_Produ_absent_count;
+                document.getElementById("PRAKASHC_Produ_Late_count").innerText = ProductionData.PRAKASHC_Produ_Late_count;
+                document.getElementById("PRAKASHC_Produ_task_score").innerText = ProductionData.PRAKASHC_Produ_task_score;
+                const PRAKASHC_Produ_positive_inc_count = ProductionData.PRAKASHC_Produ_positive_inc_count || 0;
+                const PRAKASHC_Produ_negative_inc_count = ProductionData.PRAKASHC_Produ_negative_inc_count || 0;
+                const PRAKASHC_Produ_total_inc_count = PRAKASHC_Produ_positive_inc_count + PRAKASHC_Produ_negative_inc_count;
+                const PRAKASHC_Produ_incident = `pos ${PRAKASHC_Produ_positive_inc_count} + neg ${PRAKASHC_Produ_negative_inc_count} = ${PRAKASHC_Produ_total_inc_count}`;
+                document.getElementById("PRAKASHC_Produ_incident").innerText = PRAKASHC_Produ_incident;
+
+
+
+                document.getElementById("NAGAMANIKKAMR_Produ_name").innerText = ProductionData.NAGAMANIKKAMR_Produ;
+                document.getElementById("NAGAMANIKKAMR_Produ_task_count").innerText = ProductionData.NAGAMANIKKAMR_Produ_task_count;
+                document.getElementById("NAGAMANIKKAMR_Produ_acti_count").innerText = ProductionData.NAGAMANIKKAMR_Produ_acti_count;
+                document.getElementById("NAGAMANIKKAMR_Produ_absent_count").innerText = ProductionData.NAGAMANIKKAMR_Produ_absent_count;
+                document.getElementById("NAGAMANIKKAMR_Produ_Late_count").innerText = ProductionData.NAGAMANIKKAMR_Produ_Late_count;
+                document.getElementById("NAGAMANIKKAMR_Produ_task_score").innerText = ProductionData.NAGAMANIKKAMR_Produ_task_score;
+                const NAGAMANIKKAMR_Produ_positive_inc_count = ProductionData.NAGAMANIKKAMR_Produ_positive_inc_count || 0;
+                const NAGAMANIKKAMR_Produ_negative_inc_count = ProductionData.NAGAMANIKKAMR_Produ_negative_inc_count || 0;
+                const NAGAMANIKKAMR_Produ_total_inc_count = NAGAMANIKKAMR_Produ_positive_inc_count + NAGAMANIKKAMR_Produ_negative_inc_count;
+                const NAGAMANIKKAMR_Produ_incident = `pos ${NAGAMANIKKAMR_Produ_positive_inc_count} + neg ${NAGAMANIKKAMR_Produ_negative_inc_count} = ${NAGAMANIKKAMR_Produ_total_inc_count}`;
+                document.getElementById("NAGAMANIKKAMR_Produ_incident").innerText = NAGAMANIKKAMR_Produ_incident;
+
+
+
+                document.getElementById("ARUN_Produ_name").innerText = ProductionData.ARUN_Produ;
+                document.getElementById("ARUN_Produ_task_count").innerText = ProductionData.ARUN_Produ_task_count;
+                document.getElementById("ARUN_Produ_acti_count").innerText = ProductionData.ARUN_Produ_acti_count;
+                document.getElementById("ARUN_Produ_absent_count").innerText = ProductionData.ARUN_Produ_absent_count;
+                document.getElementById("ARUN_Produ_Late_count").innerText = ProductionData.ARUN_Produ_Late_count;
+                document.getElementById("ARUN_Produ_task_score").innerText = ProductionData.ARUN_Produ_task_score;
+                const ARUN_Produ_positive_inc_count = ProductionData.ARUN_Produ_positive_inc_count || 0;
+                const ARUN_Produ_negative_inc_count = ProductionData.ARUN_Produ_negative_inc_count || 0;
+                const ARUN_Produ_total_inc_count = ARUN_Produ_positive_inc_count + ARUN_Produ_negative_inc_count;
+                const ARUN_Produ_incident = `pos ${ARUN_Produ_positive_inc_count} + neg ${ARUN_Produ_negative_inc_count} = ${ARUN_Produ_total_inc_count}`;
+                document.getElementById("ARUN_Produ_incident").innerText = ARUN_Produ_incident;
+
+
+
+
+                document.getElementById("SAKTHIVELM_Produ_name").innerText = ProductionData.SAKTHIVELM_Produ;
+                document.getElementById("SAKTHIVELM_Produ_task_count").innerText = ProductionData.SAKTHIVELM_Produ_task_count;
+                document.getElementById("SAKTHIVELM_Produ_acti_count").innerText = ProductionData.SAKTHIVELM_Produ_acti_count;
+                document.getElementById("SAKTHIVELM_Produ_absent_count").innerText = ProductionData.SAKTHIVELM_Produ_absent_count;
+                document.getElementById("SAKTHIVELM_Produ_Late_count").innerText = ProductionData.SAKTHIVELM_Produ_Late_count;
+                document.getElementById("SAKTHIVELM_Produ_task_score").innerText = ProductionData.SAKTHIVELM_Produ_task_score;
+                const SAKTHIVELM_Produ_positive_inc_count = ProductionData.SAKTHIVELM_Produ_positive_inc_count || 0;
+                const SAKTHIVELM_Produ_negative_inc_count = ProductionData.SAKTHIVELM_Produ_negative_inc_count || 0;
+                const SAKTHIVELM_Produ_total_inc_count = SAKTHIVELM_Produ_positive_inc_count + SAKTHIVELM_Produ_negative_inc_count;
+                const SAKTHIVELM_Produ_incident = `pos ${SAKTHIVELM_Produ_positive_inc_count} + neg ${SAKTHIVELM_Produ_negative_inc_count} = ${SAKTHIVELM_Produ_total_inc_count}`;
+                document.getElementById("SAKTHIVELM_Produ_incident").innerText = SAKTHIVELM_Produ_incident;
+
+
+                document.getElementById("PAULRANJITH_Produ_name").innerText = ProductionData.PAULRANJITH_Produ;
+                document.getElementById("PAULRANJITH_Produ_task_count").innerText = ProductionData.PAULRANJITH_Produ_task_count;
+                document.getElementById("PAULRANJITH_Produ_acti_count").innerText = ProductionData.PAULRANJITH_Produ_acti_count;
+                document.getElementById("PAULRANJITH_Produ_absent_count").innerText = ProductionData.PAULRANJITH_Produ_absent_count;
+                document.getElementById("PAULRANJITH_Produ_Late_count").innerText = ProductionData.PAULRANJITH_Produ_Late_count;
+                document.getElementById("PAULRANJITH_Produ_task_score").innerText = ProductionData.PAULRANJITH_Produ_task_score;
+                const PAULRANJITH_Produ_positive_inc_count = ProductionData.PAULRANJITH_Produ_positive_inc_count || 0;
+                const PAULRANJITH_Produ_negative_inc_count = ProductionData.PAULRANJITH_Produ_negative_inc_count || 0;
+                const PAULRANJITH_Produ_total_inc_count = PAULRANJITH_Produ_positive_inc_count + PAULRANJITH_Produ_negative_inc_count;
+                const PAULRANJITH_Produ_incident = `pos ${PAULRANJITH_Produ_positive_inc_count} + neg ${PAULRANJITH_Produ_negative_inc_count} = ${PAULRANJITH_Produ_total_inc_count}`;
+                document.getElementById("PAULRANJITH_Produ_incident").innerText = PAULRANJITH_Produ_incident;
+
+
+
+                document.getElementById("KARTHIT_Produ_name").innerText = ProductionData.KARTHIT_Produ;
+                document.getElementById("KARTHIT_Produ_task_count").innerText = ProductionData.KARTHIT_Produ_task_count;
+                document.getElementById("KARTHIT_Produ_acti_count").innerText = ProductionData.KARTHIT_Produ_acti_count;
+                document.getElementById("KARTHIT_Produ_absent_count").innerText = ProductionData.KARTHIT_Produ_absent_count;
+                document.getElementById("KARTHIT_Produ_Late_count").innerText = ProductionData.KARTHIT_Produ_Late_count;
+                document.getElementById("KARTHIT_Produ_task_score").innerText = ProductionData.KARTHIT_Produ_task_score;
+                const KARTHIT_Produ_positive_inc_count = ProductionData.KARTHIT_Produ_positive_inc_count || 0;
+                const KARTHIT_Produ_negative_inc_count = ProductionData.KARTHIT_Produ_negative_inc_count || 0;
+                const KARTHIT_Produ_total_inc_count = KARTHIT_Produ_positive_inc_count + KARTHIT_Produ_negative_inc_count;
+                const KARTHIT_Produ_incident = `pos ${KARTHIT_Produ_positive_inc_count} + neg ${KARTHIT_Produ_negative_inc_count} = ${KARTHIT_Produ_total_inc_count}`;
+                document.getElementById("KARTHIT_Produ_incident").innerText = KARTHIT_Produ_incident;
+
+
+
+                document.getElementById("GOWTHAMSURYAPRAKASH_Produ_name").innerText = ProductionData.GOWTHAMSURYAPRAKASH_Produ;
+                document.getElementById("GOWTHAMSURYAPRAKASH_Produ_task_count").innerText = ProductionData.GOWTHAMSURYAPRAKASH_Produ_task_count;
+                document.getElementById("GOWTHAMSURYAPRAKASH_Produ_acti_count").innerText = ProductionData.GOWTHAMSURYAPRAKASH_Produ_acti_count;
+                document.getElementById("GOWTHAMSURYAPRAKASH_Produ_absent_count").innerText = ProductionData.GOWTHAMSURYAPRAKASH_Produ_absent_count;
+                document.getElementById("GOWTHAMSURYAPRAKASH_Produ_Late_count").innerText = ProductionData.GOWTHAMSURYAPRAKASH_Produ_Late_count;
+                document.getElementById("GOWTHAMSURYAPRAKASH_Produ_task_score").innerText = ProductionData.GOWTHAMSURYAPRAKASH_Produ_task_score;
+                const GOWTHAMSURYAPRAKASH_Produ_positive_inc_count = ProductionData.GOWTHAMSURYAPRAKASH_Produ_positive_inc_count || 0;
+                const GOWTHAMSURYAPRAKASH_Produ_negative_inc_count = ProductionData.GOWTHAMSURYAPRAKASH_Produ_negative_inc_count || 0;
+                const GOWTHAMSURYAPRAKASH_Produ_total_inc_count = GOWTHAMSURYAPRAKASH_Produ_positive_inc_count + GOWTHAMSURYAPRAKASH_Produ_negative_inc_count;
+                const GOWTHAMSURYAPRAKASH_Produ_incident = `pos ${GOWTHAMSURYAPRAKASH_Produ_positive_inc_count} + neg ${GOWTHAMSURYAPRAKASH_Produ_negative_inc_count} = ${GOWTHAMSURYAPRAKASH_Produ_total_inc_count}`;
+                document.getElementById("GOWTHAMSURYAPRAKASH_Produ_incident").innerText = GOWTHAMSURYAPRAKASH_Produ_incident;
+
+
+
+                document.getElementById("BALASUBRAMANI_Produ_name").innerText = ProductionData.BALASUBRAMANI_Produ;
+                document.getElementById("BALASUBRAMANI_Produ_task_count").innerText = ProductionData.BALASUBRAMANI_Produ_task_count;
+                document.getElementById("BALASUBRAMANI_Produ_acti_count").innerText = ProductionData.BALASUBRAMANI_Produ_acti_count;
+                document.getElementById("BALASUBRAMANI_Produ_absent_count").innerText = ProductionData.BALASUBRAMANI_Produ_absent_count;
+                document.getElementById("BALASUBRAMANI_Produ_Late_count").innerText = ProductionData.BALASUBRAMANI_Produ_Late_count;
+                document.getElementById("BALASUBRAMANI_Produ_task_score").innerText = ProductionData.BALASUBRAMANI_Produ_task_score;
+                const BALASUBRAMANI_Produ_positive_inc_count = ProductionData.BALASUBRAMANI_Produ_positive_inc_count || 0;
+                const BALASUBRAMANI_Produ_negative_inc_count = ProductionData.BALASUBRAMANI_Produ_negative_inc_count || 0;
+                const BALASUBRAMANI_Produ_total_inc_count = BALASUBRAMANI_Produ_positive_inc_count + BALASUBRAMANI_Produ_negative_inc_count;
+                const BALASUBRAMANI_Produ_incident = `pos ${BALASUBRAMANI_Produ_positive_inc_count} + neg ${BALASUBRAMANI_Produ_negative_inc_count} = ${BALASUBRAMANI_Produ_total_inc_count}`;
+                document.getElementById("BALASUBRAMANI_Produ_incident").innerText = BALASUBRAMANI_Produ_incident;
+               
+            }
+        };
+    </script>
+</body>
+</html>
